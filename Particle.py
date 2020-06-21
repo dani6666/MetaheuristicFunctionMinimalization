@@ -9,6 +9,6 @@ class Particle:
         self.velocity = []
         self.position = copy.deepcopy(list(position))
         for i in range(5):
-            self.velocity.append(random.uniform(0, 2))
+            self.velocity.append(random.uniform(-1, 1))
         self.best_position = copy.deepcopy(list(self.position))
         self.best_value = 0

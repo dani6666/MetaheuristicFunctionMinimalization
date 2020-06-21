@@ -6,7 +6,7 @@ from Particle import Particle
 
 
 class ParticleSwarm:
-    number_of_particles = 10
+    number_of_particles = 20
     breaking_factor = 0.9
     local_approach_factor = 0.3
     swarm_approach_factor = 0.3
@@ -21,7 +21,7 @@ class ParticleSwarm:
             particles.append(Particle(x))
 
         swarm_best_position = copy.deepcopy(particles[0].best_position)
-        swarm_best_value = f(*ParticleSwarm.to_function_args(particles[0].best_position))
+        swarm_best_value = f(*ParticleSwarm.to_function_args(swarm_best_position))
         for particle in particles[1:]:
             particle.best_value = f(*ParticleSwarm.to_function_args(particle.best_position))
             if particle.best_value < swarm_best_value:
@@ -37,7 +37,6 @@ class ParticleSwarm:
                                            ParticleSwarm.swarm_approach_factor * random.random() * \
                                            (swarm_best_position[i] - particle.position[i])
                     particle.position[i] = particle.position[i] + particle.velocity[i]
-
                 try:
                     particle_value = f(*ParticleSwarm.to_function_args(particle.position))
                 except OverflowError:
